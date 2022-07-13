@@ -22,6 +22,9 @@ public class User implements UserDetails {
     @Column(name = "name")
     private String username;
 
+    @Column(name = "lastname")
+    private String lastname;
+
     @Column(name = "password")
     private String password;
 
@@ -65,15 +68,16 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    public User(String name, String password, int age, String email, Collection<Role> roles) {
-        this.username = name;
+    public User(String username, String lastname, String password, int age, String email, Collection<Role> roles) {
+        this.username = username;
+        this.lastname = lastname;
         this.password = password;
         this.age = age;
         this.email = email;
         this.roles = roles;
     }
 
-  //  ----------------------------------------------------
+    //  ----------------------------------------------------
     public int getId() {
         return id;
     }
@@ -88,6 +92,18 @@ public class User implements UserDetails {
 
     public void setName(String name) {
         this.username = name;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
     public void setPassword(String password) {
@@ -118,6 +134,17 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
+    public String roleToString(User user) {
+        StringBuilder builder = new StringBuilder();
+        Collection<Role> roles = user.getRoles();
+        for (Role role : roles) {
+            builder.append(role.getName()).append(" ");
+        }
+        return builder.toString();
+
+    }
+
+
     @Override
     public String toString() {
         return "User{" +
@@ -139,7 +166,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return username;
+        return email;
     }
 
     @Override

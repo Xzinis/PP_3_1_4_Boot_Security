@@ -22,15 +22,14 @@ public class UserServiceImp implements UserService {
         this.encoder = encoder;
     }
 
-    @Transactional
     @Override
     public List<User> findAll() {
         return userRepository.findAll();
     }
 
-    @Transactional
+
     @Override
-    public User findOne(int id) {
+    public User findOne(long id) {
         Optional<User> foundUser = userRepository.findById(id);
         return foundUser.orElse(null);
     }
@@ -55,16 +54,13 @@ public class UserServiceImp implements UserService {
         userRepository.save(user);
     }
 
-//    @Transactional
-//    @Override
-//    public void update(int id, User updatedUser) {
-//        updatedUser.setId(id);
-//        userRepository.save(updatedUser);
-//    }
-
     @Transactional
     @Override
-    public void delete(int id) {
-        userRepository.deleteById(id);
-    }
+    public boolean deleteById(long id) {
+        if (userRepository.findById(id).isPresent()) {
+            userRepository.deleteById(id);
+            return true;
+        }
+        return false;
+        }
 }

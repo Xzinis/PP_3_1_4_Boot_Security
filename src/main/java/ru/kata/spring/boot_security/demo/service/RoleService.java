@@ -1,6 +1,7 @@
 package ru.kata.spring.boot_security.demo.service;
 
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.models.Role;
 import ru.kata.spring.boot_security.demo.repository.RoleRepository;
 
@@ -9,8 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Repository
-@Transactional
+@Service
 public class RoleService {
 
     private final RoleRepository roleRepository;
@@ -24,7 +24,7 @@ public class RoleService {
     }
 
 
-    public Role findRoleById(Integer id) {
+    public Role findRoleById(Long id) {
         return roleRepository.findRoleById(id);
     }
 

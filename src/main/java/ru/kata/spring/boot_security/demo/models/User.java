@@ -17,7 +17,7 @@ public class User implements UserDetails {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(name = "name")
     private String username;
@@ -36,8 +36,6 @@ public class User implements UserDetails {
 
     @ManyToMany
     @JoinTable(name = "users_roles",
-//               joinColumns = @JoinColumn(name = "user_id", referencedColumnName="id"),
-//               inverseJoinColumns = @JoinColumn(name="role_id", referencedColumnName="id"))
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name="role_id"))
     private Collection<Role> roles;
@@ -77,8 +75,7 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    //  ----------------------------------------------------
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -86,7 +83,7 @@ public class User implements UserDetails {
         return username;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -125,7 +122,7 @@ public class User implements UserDetails {
     public void setEmail(String email) {
         this.email = email;
     }
-//----------------------------------------------------------------
+
     public Collection<Role> getRoles() {
         return roles;
     }
